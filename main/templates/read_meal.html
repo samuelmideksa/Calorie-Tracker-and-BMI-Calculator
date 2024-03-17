@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Calorie Calculator{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div
+  class="container px-5"
+>
+  <div
+    class="container text-end my-3"
+  >
+    <a
+      name=""
+      id=""
+      class="btn btn-primary"
+      href="{% url 'add_meal' %}"
+      role="button"
+    >Add</a
+    >
+  </div>
+
+
+  <table
+    class="table table-primary"
+  >
+    <thead>
+    <tr>
+      <th scope="col">Meal</th>
+      <th scope="col">Calories</th>
+      <th scope="col">Date</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for meal in meals %}
+    <tr class="table table-white">
+      <td>{{ meal.name }}</td>
+      <td>{{ meal.calories }}</td>
+      <td>{{ meal.date }}</td>
+      <td>
+        <a
+          name=""
+          id=""
+          class="btn btn-primary"
+          href="{% url 'edit_meal' meal.id %}"
+          role="button"
+        >Edit</a
+        >
+        <a
+          name=""
+          id=""
+          class="btn btn-danger"
+          href="{% url 'delete_meal' meal.id %}"
+          role="button"
+        >Delete</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <div>Total Calories Today: {{ total_calories_today }}</div>
+  <div>Total Calories This Week: {{ total_calories_week }}</div>
+
+</div>
+{% else %}
+<p><a href="{% url 'login' %}">Log in</a> to track calories</p>
+{% endif %}
+
+{% endblock %}

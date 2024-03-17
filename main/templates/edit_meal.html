@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Calorie Calculator{% endblock %}
+
+{% block content %}
+<div
+  class="row-cols-4 justify-content-center align-items-center g-2"
+>
+  <div class="col">
+    <form method="POST">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button
+        type="submit"
+        class="btn btn-success mt-3"
+      >
+        Save
+      </button>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}
